@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CatchRabbitBehaviour.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterBehaviour.cpp" />
     <ClCompile Include="Cow.cpp" />
@@ -93,12 +94,18 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathNode.cpp" />
+    <ClCompile Include="Pill.cpp" />
     <ClCompile Include="Rabbit.cpp" />
+    <ClCompile Include="SearchPillBehaviour.cpp" />
+    <ClCompile Include="SearchWeaponBehaviour.cpp" />
+    <ClCompile Include="WanderingBehaviour.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CatchRabbitBehaviour.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterBehaviour.h" />
     <ClInclude Include="Config.h" />
@@ -109,8 +116,13 @@
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PathNode.h" />
+    <ClInclude Include="Pill.h" />
     <ClInclude Include="Rabbit.h" />
+    <ClInclude Include="SearchPillBehaviour.h" />
+    <ClInclude Include="SearchWeaponBehaviour.h" />
     <ClInclude Include="Utill.h" />
+    <ClInclude Include="WanderingBehaviour.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,8 @@
 #include <SDL.h>
 #include "Rabbit.h"
 #include "Cow.h"
+#include "Pill.h"
+#include "Weapon.h"
 
 class Graph
 {
@@ -22,5 +24,7 @@ public:
 
 	Rabbit* rabbit;
 	Cow* cow;
+	Pill* pill;
+	Weapon* weapon;
 };
 
