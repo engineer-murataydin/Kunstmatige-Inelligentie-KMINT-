@@ -5,11 +5,14 @@
 #include "IGameObject.h"
 
 using namespace std;
+
 class Edge;
+class Graph;
+
 class Node
 {
 public:
-	Node(float x, float y);
+	Node(float x, float y, Graph* graph);
 	~Node();
 
 	void addEdge(Edge* edge);
@@ -17,6 +20,7 @@ public:
 
 	float x;
 	float y;
+	Graph* graph;
 
 	Node* getRandomConnectedNode();
 	Node* getRandomConnectedNode(Node* node, int times);

@@ -1,11 +1,12 @@
 #include "Node.h"
 #include "Edge.h"
+#include "Graph.h"
 
-
-Node::Node(float x, float y)
+Node::Node(float x, float y, Graph* graph)
 {
 	this->x = x;
 	this->y = y;
+	this->graph = graph;
 
 	dre = default_random_engine(random_device()());
 }

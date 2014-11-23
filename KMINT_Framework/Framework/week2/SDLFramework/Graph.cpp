@@ -5,37 +5,37 @@
 
 Graph::Graph()
 {
-	Node* node = new Node(100, 100);
+	Node* node = new Node(100, 100, this);
 	nodes.push_back(node);
 
-	node = new Node(100, 150);
+	node = new Node(100, 150, this);
 	new Edge(node, nodes[0]);
 	nodes.push_back(node);
 
-	node = new Node(400, 200);
+	node = new Node(400, 200, this);
 	nodes.push_back(node);
 
-	node = new Node(50, 300);
+	node = new Node(50, 300, this);
 	new Edge(node, nodes[1]);
 	new Edge(node, nodes[2]);
 	nodes.push_back(node);
 
-	node = new Node(250, 400);
+	node = new Node(250, 400, this);
 	new Edge(node, nodes[2]);
 	nodes.push_back(node);
 
-	node = new Node(100, 400);
+	node = new Node(100, 400, this);
 	new Edge(node, nodes[2]);
 	new Edge(node, nodes[4]);
 	nodes.push_back(node);
 
-	node = new Node(150, 200);
+	node = new Node(150, 200, this);
 	new Edge(node, nodes[3]);
 	new Edge(node, nodes[2]);
 	new Edge(node, nodes[1]);
 	nodes.push_back(node);
 
-	node = new Node(275, 125);
+	node = new Node(275, 125, this);
 	new Edge(node, nodes[2]);
 	new Edge(node, nodes[1]);
 	new Edge(node, nodes[0]);
@@ -136,7 +136,7 @@ stack<Node*> Graph::CreatePath(Node* from, Node* to)
 				{
 					openList[foundNode] = new PathNode(foundNode,
 						pathNode->g + node->edges[i]->cost,
-						Utill::distanceBewteenPoints(foundNode->x, foundNode->y, node->x, node->y),
+						Utill::distanceBewteenPoints(foundNode->x, foundNode->y, to->x, to->y),
 						pathNode);
 				}
 			}
