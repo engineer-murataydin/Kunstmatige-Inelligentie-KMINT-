@@ -23,7 +23,7 @@ public:
 	Graph* graph;
 
 	Node* getRandomConnectedNode();
-	Node* getRandomConnectedNode(Node* node, int times);
+	static Node* getRandomConnectedNode(Node* node, int times);
 
 	vector<Edge*> edges;
 

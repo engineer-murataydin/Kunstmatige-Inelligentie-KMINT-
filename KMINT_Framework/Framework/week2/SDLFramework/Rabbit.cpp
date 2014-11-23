@@ -1,10 +1,14 @@
 #include "Rabbit.h"
 #include "FWApplication.h"
+#include "WanderingBehaviour.h"
 
 Rabbit::Rabbit(Node* location) :Character(location)
 {
-	SetTexture(FWApplication::GetInstance()->LoadTexture("rabbit-3.png"));
+	textureName = "rabbit-3.png";
+	SetTexture(LoadTexture());
 	SetSize(50, 50);
+
+	behaviour = new WanderingBehaviour(this);
 }
 
 
@@ -14,19 +18,18 @@ Rabbit::~Rabbit()
 
 Node* Rabbit::move()
 {
-	Node* temp = getLocation();
-	while (temp == getLocation())
-	{
-		for (int i = 0; i < 100; i++)
-		{
-			setLocation(getLocation()->getRandomConnectedNode());
-		}
-	}
-	SetOffset(getLocation()->x, getLocation()->y);
-	return getLocation();
+	return behaviour->move();
+}
+
+Node* Rabbit::moveRandom()
+{
+	Node* location = Node::getRandomConnectedNode(getLocation(), 100);
+	setLocation(location);
+
+	return location;
 }
 
 void Rabbit::Update(float deltaTime)
 {
-
+	behaviour->checkState();
 }

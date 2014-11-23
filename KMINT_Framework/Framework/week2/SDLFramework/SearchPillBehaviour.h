@@ -7,5 +7,6 @@ public:
 	SearchPillBehaviour(Character* character);
 	~SearchPillBehaviour();
 	Node* move();
+	void checkState();
 };
 

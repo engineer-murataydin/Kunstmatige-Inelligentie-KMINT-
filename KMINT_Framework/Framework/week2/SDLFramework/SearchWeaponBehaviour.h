@@ -7,5 +7,6 @@ public:
 	SearchWeaponBehaviour(Character* character);
 	~SearchWeaponBehaviour();
 	Node* move();
+	void checkState();
 };
 

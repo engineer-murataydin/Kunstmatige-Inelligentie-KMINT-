@@ -85,10 +85,9 @@ void Graph::processInput(SDL_Event event)
 
 void Graph::step()
 {
-	if (rabbit->getLocation() == cow->move(rabbit->getLocation()))
-	{
-		rabbit->move();
-	}
+	cow->move();
+	rabbit->move();
+	
 }
 
 

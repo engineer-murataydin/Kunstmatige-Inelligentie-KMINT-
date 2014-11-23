@@ -7,5 +7,6 @@ public:
 	CatchRabbitBehaviour(Character* character);
 	~CatchRabbitBehaviour();
 	Node* move();
+	void checkState();
 };
 

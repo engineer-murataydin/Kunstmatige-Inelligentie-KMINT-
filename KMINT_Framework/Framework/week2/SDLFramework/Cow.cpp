@@ -4,9 +4,9 @@
 
 Cow::Cow(Node* location) : Character(location)
 {
-	SetTexture(FWApplication::GetInstance()->LoadTexture("cow-1.png"));
+	textureName = "cow-1.png";
+	SetTexture(LoadTexture());
 	SetSize(50, 50);
-
 	behaviour = new WanderingBehaviour(this);
 }
 
@@ -18,25 +18,14 @@ Cow::~Cow()
 
 void Cow::Update(float deltaTime)
 {
-
+	behaviour->checkState();
 }
 
-Node* Cow::move(Node* destination)
+Node* Cow::move()
 {
-	/*if (path.empty() || previousGoal != destination)
+	if (!isBored())
 	{
-		path = Graph::CreatePath(getLocation(), destination);
+		bored += 25;
 	}
-
-	previousGoal = destination;
-
-	if (!path.empty())
-	{
-		setLocation(path.top());
-		path.pop();
-	}
-	SetOffset(getLocation()->x, getLocation()->y);
-	return getLocation();*/
-
 	return behaviour->move();
 }

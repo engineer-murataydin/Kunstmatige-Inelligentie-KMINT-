@@ -6,6 +6,11 @@ class WanderingBehaviour :
 public:
 	WanderingBehaviour(Character* character);
 	~WanderingBehaviour();
-	Node* move();
+	virtual Node* move();
+	virtual void checkState();
+
+protected:
+	default_random_engine dre;
+	uniform_int_distribution<int> chanse;
 };
 

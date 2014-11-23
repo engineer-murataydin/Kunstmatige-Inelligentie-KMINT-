@@ -1,10 +1,9 @@
 #include "Item.h"
-
+#include "FWApplication.h"
 
 Item::Item(Node* location)
 {
-	this->location = location;
-	SetOffset(location->x, location->y);
+	setLocation(Node::getRandomConnectedNode(location, 100));
 }
 
 
@@ -25,4 +24,5 @@ Node* Item::getLocation()
 void Item::setLocation(Node* location)
 {
 	this->location = location;
+	SetOffset(location->x, location->y);
 }

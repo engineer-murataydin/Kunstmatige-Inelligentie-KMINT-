@@ -9,8 +9,7 @@ public:
 	Cow(Node* location);
 	~Cow();
 
-	Node* move(Node* destination);
-	Node* move(){ return NULL; };
+	Node* move();
 	void Update(float deltaTime);
 	stack<Node*> path;
 

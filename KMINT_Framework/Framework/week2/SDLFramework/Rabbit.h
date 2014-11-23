@@ -10,6 +10,6 @@ public:
 	~Rabbit();
 	void Update(float deltaTime);
 	Node* move();
-
+	Node* moveRandom();
 };
 

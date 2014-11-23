@@ -324,6 +324,19 @@ void FWApplication::AddRenderable(IGameObject * renderable)
 	mGameObjects.push_back(renderable);
 }
 
+void FWApplication::RemoveRenderable(IGameObject * renderable)
+{
+	for (auto iterator = mGameObjects.begin(); iterator != mGameObjects.end(); iterator++)
+	{
+		if (renderable == *iterator)
+		{
+			mGameObjects.erase(iterator);
+			break;
+		}
+	}
+}
+
+
 uint32_t FWApplication::GetTimeSinceStartedMS() const
 {
 	return mTimeMS;

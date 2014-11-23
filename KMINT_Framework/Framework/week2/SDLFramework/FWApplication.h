@@ -59,7 +59,7 @@ public:
 	SDL_Window * GetWindow() const;
 	static FWApplication * GetInstance();
 
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// <summary>	Is the game running, returns false when window is closed. </summary>
 	///
@@ -119,7 +119,7 @@ public:
 	/// <param name="height"> 	The height. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	void DrawTexture(SDL_Texture * texture, int xOffset, int yOffset, int width, int height);
-	
+
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,6 +223,7 @@ public:
 	/// <param name="renderable">	[in,out] If non-null, the renderable. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	void AddRenderable(IGameObject * renderable);
+	void RemoveRenderable(IGameObject * renderable);
 
 	uint32_t GetTimeSinceStartedMS() const;
 

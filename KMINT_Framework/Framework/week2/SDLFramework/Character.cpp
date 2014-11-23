@@ -3,7 +3,7 @@
 
 Character::Character(Node* location)
 {
-	setLocation(location);
+	setLocation(Node::getRandomConnectedNode(location, 100));
 }
 
 
@@ -25,4 +25,20 @@ Node* Character::getLocation()
 void Character::setBehaviour(CharacterBehaviour* behaviour)
 {
 	this->behaviour = behaviour;
+}
+
+SDL_Texture* Character::LoadTexture()
+{
+	return FWApplication::GetInstance()->LoadTexture(textureName);
+}
+
+
+bool Character::isBored()
+{
+	return bored >= 100;
+}
+
+void Character::setBored(int value)
+{
+	bored = value;
 }
