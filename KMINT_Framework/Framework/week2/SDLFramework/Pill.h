@@ -1,8 +1,10 @@
 #pragma once
-class Pill
+#include "Item.h"
+
+class Pill : public Item
 {
 public:
-	Pill();
+	Pill(Node* position);
 	~Pill();
 };
 

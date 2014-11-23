@@ -17,7 +17,7 @@ public:
 	void setBehaviour(CharacterBehaviour* behaviour);
 private:
 	Node* location;
+protected:
 	CharacterBehaviour* behaviour;
-
 };
 

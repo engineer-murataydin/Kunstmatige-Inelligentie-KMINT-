@@ -91,6 +91,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathNode.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PathNode.h" />
     <ClInclude Include="Pill.h" />

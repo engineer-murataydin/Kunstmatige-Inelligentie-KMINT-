@@ -6,7 +6,6 @@ CharacterBehaviour::CharacterBehaviour(Character* character)
 	this->character = character;
 }
 
-
 CharacterBehaviour::~CharacterBehaviour()
 {
 }

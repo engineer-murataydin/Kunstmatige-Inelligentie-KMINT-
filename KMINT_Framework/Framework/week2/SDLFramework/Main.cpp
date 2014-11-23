@@ -11,8 +11,6 @@ int main(int argc, char **argv)
 	//auto window = Window::CreateSDLWindow();
 	auto application = new FWApplication();
 	Graph* graph = new Graph();
-	application->AddRenderable(graph->cow);
-	application->AddRenderable(graph->rabbit);
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");

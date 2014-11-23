@@ -1,8 +1,10 @@
 #pragma once
-class Weapon
+#include "Item.h"
+
+class Weapon : public Item
 {
 public:
-	Weapon();
+	Weapon(Node* position);
 	~Weapon();
 };
 

@@ -2,6 +2,7 @@
 #include "Utill.h"
 #include "PathNode.h"
 #include <map>
+#include "FWApplication.h"
 
 Graph::Graph()
 {
@@ -43,6 +44,15 @@ Graph::Graph()
 
 	cow = new Cow(nodes[1]);
 	rabbit = new Rabbit(nodes[3]);
+	pill = new Pill(nodes[5]);
+	weapon = new Weapon(nodes[2]);
+
+	FWApplication* application = FWApplication::GetInstance();
+
+	application->AddRenderable(cow);
+	application->AddRenderable(rabbit);
+	application->AddRenderable(pill);
+	application->AddRenderable(weapon);
 }
 
 
