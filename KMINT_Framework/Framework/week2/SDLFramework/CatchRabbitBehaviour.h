@@ -4,7 +4,7 @@ class CatchRabbitBehaviour :
 	public CharacterBehaviour
 {
 public:
-	CatchRabbitBehaviour();
+	CatchRabbitBehaviour(Character* character);
 	~CatchRabbitBehaviour();
 	Node* move();
 };
