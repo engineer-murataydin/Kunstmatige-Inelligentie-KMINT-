@@ -1,9 +1,11 @@
 #pragma once
 #include "CharacterBehaviour.h"
+class Rabbit;
+
 class DeadBehaviour : public CharacterBehaviour
 {
 public:
-	DeadBehaviour(Character* character);
+	DeadBehaviour(Rabbit* character);
 	~DeadBehaviour();
 
 	Node* move();
@@ -11,5 +13,8 @@ public:
 
 private:
 	int	stepsLeft;
+
+protected:
+	Rabbit* character;
 };
 

@@ -1,10 +1,12 @@
 #include "SearchWeaponBehaviour.h"
-#include "CatchRabbitBehaviour.h"
+#include "CatchCowBehaviour.h"
 #include "Character.h"
+#include "Rabbit.h"
 #include "Graph.h"
 
-SearchWeaponBehaviour::SearchWeaponBehaviour(Character* character) : CharacterBehaviour(character)
+SearchWeaponBehaviour::SearchWeaponBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
+	this->character = character;
 	SDL_Texture* texture = character->LoadTexture();
 	SDL_SetTextureColorMod(texture, 100, 0, 0);
 	character->SetTexture(texture);
@@ -31,8 +33,8 @@ void SearchWeaponBehaviour::checkState()
 {
 	if (character->getLocation() == character->getLocation()->graph->weapon->getLocation())
 	{
-		character->setBehaviour(new CatchRabbitBehaviour(character));
-		character->getLocation()->graph->weapon->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		character->setBehaviour(new CatchCowBehaviour(character));
+		character->weapon = character->getLocation()->graph->weapon;
 		delete this;
 	}
 }

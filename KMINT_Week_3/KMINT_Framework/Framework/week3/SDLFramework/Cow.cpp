@@ -1,13 +1,13 @@
 #include "Cow.h"
 #include "Graph.h"
-#include "WanderingBehaviour.h"
+#include "CatchRabbitBehaviour.h"
 
 Cow::Cow(Node* location) : Character(location)
 {
 	textureName = "cow-1.png";
 	SetTexture(LoadTexture());
 	SetSize(50, 50);
-	behaviour = new WanderingBehaviour(this);
+	behaviour = new CatchRabbitBehaviour(this);
 }
 
 Cow::~Cow()
@@ -22,9 +22,5 @@ void Cow::Update(float deltaTime)
 
 Node* Cow::move()
 {
-	if (!isBored())
-	{
-		bored += 25;
-	}
 	return behaviour->move();
 }

@@ -1,10 +1,16 @@
 #include "WanderingBehaviour.h"
 #include "SearchPillBehaviour.h"
+#include "SearchWeaponBehaviour.h"
+#include "FleeBehaviour.h"
 #include "Character.h"
+#include "Rabbit.h"
 #include "Graph.h"
 
-WanderingBehaviour::WanderingBehaviour(Character* character) : CharacterBehaviour(character)
+#include <iostream>
+
+WanderingBehaviour::WanderingBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
+	this->character = character;
 	chanse = uniform_int_distribution<int>(0, 100);
 	SDL_Texture* texture = character->LoadTexture();
 	//SDL_SetTextureColorMod(texture, 0, 0, 0);
@@ -28,9 +34,29 @@ Node* WanderingBehaviour::move()
 
 void WanderingBehaviour::checkState()
 {
-	if (character->isBored())
+	if (!character->pill)
 	{
-		character->setBehaviour(new SearchPillBehaviour(character));
+		int random = chanse(dre);
+		if (random <= character->chanseFlee)
+		{
+			character->setBehaviour(new FleeBehaviour(character));//todo fix
+			character->setChanse(&character->chanseFlee, &character->chanseSleepingPill, &character->chanseWeapon);
+		}
+		else if (random <= character->chanseFlee + character->chanseSleepingPill)
+		{
+			character->setBehaviour(new SearchPillBehaviour(character));
+			character->setChanse(&character->chanseSleepingPill, &character->chanseFlee, &character->chanseWeapon);
+		}
+		else if (random <= character->chanseFlee + character->chanseSleepingPill + character->chanseWeapon)
+		{
+			character->setBehaviour(new SearchWeaponBehaviour(character));
+			character->setChanse(&character->chanseWeapon, &character->chanseFlee, &character->chanseSleepingPill);
+		}
+
+		cout << "flee : " << character->chanseFlee << endl;
+		cout << "pill : " << character->chanseSleepingPill << endl;
+		cout << "weap : " << character->chanseWeapon << endl;
+
 		delete this;
 	}
 }

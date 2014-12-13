@@ -26,5 +26,7 @@ public:
 	Cow* cow;
 	Pill* pill;
 	Weapon* weapon;
+
+	Node* outOfscreen;
 };
 

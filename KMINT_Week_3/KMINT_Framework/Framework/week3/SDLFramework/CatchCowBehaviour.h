@@ -3,12 +3,11 @@
 
 class Rabbit;
 
-class SearchWeaponBehaviour :
-	public CharacterBehaviour
+class CatchCowBehaviour : public CharacterBehaviour
 {
 public:
-	SearchWeaponBehaviour(Rabbit* character);
-	~SearchWeaponBehaviour();
+	CatchCowBehaviour(Rabbit* character);
+	~CatchCowBehaviour();
 	Node* move();
 	void checkState();
 

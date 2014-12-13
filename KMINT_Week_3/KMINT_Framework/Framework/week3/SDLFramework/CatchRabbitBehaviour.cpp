@@ -1,6 +1,7 @@
 #include "CatchRabbitBehaviour.h"
 #include "WanderingBehaviour.h"
 #include "DeadBehaviour.h"
+#include "SleepingBehaviour.h"
 #include "Character.h"
 #include "Graph.h"
 
@@ -31,12 +32,18 @@ void CatchRabbitBehaviour::checkState()
 {
 	if (character->getLocation() == character->getLocation()->graph->rabbit->getLocation())
 	{
-		character->setBehaviour(new WanderingBehaviour(character));
-
-		Rabbit* rabbit = character->getLocation()->graph->rabbit;
-		rabbit->setBehaviour(new DeadBehaviour(rabbit));
-
-		character->setBored(0);
-		delete this;
+		if (character->getLocation()->graph->rabbit->pill)
+		{
+			character->setBehaviour(new SleepingBehaviour(character));
+			Rabbit* rabbit = character->getLocation()->graph->rabbit;
+			rabbit->pill->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+			rabbit->pill = nullptr;
+		}
+		else
+		{
+			Rabbit* rabbit = character->getLocation()->graph->rabbit;
+			rabbit->setBehaviour(new WanderingBehaviour(rabbit));
+			character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		}
 	}
 }

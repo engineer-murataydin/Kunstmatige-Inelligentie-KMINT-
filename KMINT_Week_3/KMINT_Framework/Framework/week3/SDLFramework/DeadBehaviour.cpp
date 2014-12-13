@@ -1,10 +1,12 @@
 #include "DeadBehaviour.h"
 #include "WanderingBehaviour.h"
 #include "Character.h"
+#include "Rabbit.h"
 #include "Graph.h"
 
-DeadBehaviour::DeadBehaviour(Character* character) : CharacterBehaviour(character)
+DeadBehaviour::DeadBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
+	this->character = character;
 	SDL_Texture* texture = character->LoadTexture();
 	SDL_SetTextureColorMod(texture, 50, 50, 50);
 	character->SetTexture(texture);
@@ -24,9 +26,9 @@ Node* DeadBehaviour::move()
 
 void DeadBehaviour::checkState()
 {
-	if (!stepsLeft)
+	if (stepsLeft <= 0)
 	{
-		character->setBehaviour(new WanderingBehaviour(character));
 		character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		character->setBehaviour(new WanderingBehaviour(character));
 	}
 }

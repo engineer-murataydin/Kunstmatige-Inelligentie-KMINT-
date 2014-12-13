@@ -6,6 +6,8 @@
 
 Graph::Graph()
 {
+	outOfscreen = new Node(-100, -100, this);
+
 	Node* node = new Node(100, 100, this);
 	nodes.push_back(node);
 
@@ -62,6 +64,7 @@ Graph::~Graph()
 	{
 		delete nodes[i];
 	}
+	delete outOfscreen;
 }
 
 void Graph::processInput(SDL_Event event)
@@ -87,7 +90,7 @@ void Graph::step()
 {
 	cow->move();
 	rabbit->move();
-	
+
 }
 
 
@@ -108,6 +111,12 @@ void Graph::render()
 
 stack<Node*> Graph::CreatePath(Node* from, Node* to)
 {
+	if (from == to)
+	{
+		stack<Node*> stack;
+		stack.push(from);
+		return stack;
+	}
 	map<Node*, PathNode*> openList;
 	map<Node*, PathNode*> closedList;
 

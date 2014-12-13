@@ -9,8 +9,11 @@ Rabbit::Rabbit(Node* location) :Character(location)
 	SetSize(50, 50);
 
 	behaviour = new WanderingBehaviour(this);
-}
 
+	chanseFlee = 33;
+	chanseSleepingPill = 33;
+	chanseWeapon = 33;
+}
 
 Rabbit::~Rabbit()
 {
@@ -32,4 +35,12 @@ Node* Rabbit::moveRandom()
 void Rabbit::Update(float deltaTime)
 {
 	behaviour->checkState();
+}
+
+void Rabbit::setChanse(double* decrease, double* increaseOne, double* increaseTwo)
+{
+	double remove = *decrease * 0.25;
+	*decrease -= remove;
+	*increaseOne += 0.5 * remove;
+	*increaseTwo += 0.5 * remove;
 }

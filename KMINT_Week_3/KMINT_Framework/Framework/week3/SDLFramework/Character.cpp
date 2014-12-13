@@ -32,13 +32,3 @@ SDL_Texture* Character::LoadTexture()
 	return FWApplication::GetInstance()->LoadTexture(textureName);
 }
 
-
-bool Character::isBored()
-{
-	return bored >= 100;
-}
-
-void Character::setBored(int value)
-{
-	bored = value;
-}

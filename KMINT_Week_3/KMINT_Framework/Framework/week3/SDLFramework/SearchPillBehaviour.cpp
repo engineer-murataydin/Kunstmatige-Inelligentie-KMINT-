@@ -1,13 +1,17 @@
 #include "SearchPillBehaviour.h"
 #include "SearchWeaponBehaviour.h"
+#include "WanderingBehaviour.h"
 #include "Character.h"
+#include "Rabbit.h"
 #include "Graph.h"
 
-SearchPillBehaviour::SearchPillBehaviour(Character* character) : CharacterBehaviour(character)
+SearchPillBehaviour::SearchPillBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
+	this->character = character;
 	SDL_Texture* texture = character->LoadTexture();
 	SDL_SetTextureColorMod(texture, 0, 100, 0);
 	character->SetTexture(texture);
+	this->character = character;
 }
 
 SearchPillBehaviour::~SearchPillBehaviour()
@@ -30,8 +34,9 @@ void SearchPillBehaviour::checkState()
 {
 	if (character->getLocation() == character->getLocation()->graph->pill->getLocation())
 	{
-		character->setBehaviour(new SearchWeaponBehaviour(character));
-		character->getLocation()->graph->pill->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		character->setBehaviour(new WanderingBehaviour(character));
+		character->pill = character->getLocation()->graph->pill;
+		character->pill->setLocation(character->getLocation()->graph->outOfscreen);
 
 		delete this;
 	}

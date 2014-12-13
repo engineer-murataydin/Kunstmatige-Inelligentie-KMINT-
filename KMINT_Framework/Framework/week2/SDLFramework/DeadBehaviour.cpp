@@ -12,7 +12,6 @@ DeadBehaviour::DeadBehaviour(Character* character) : CharacterBehaviour(characte
 	stepsLeft = 4;
 }
 
-
 DeadBehaviour::~DeadBehaviour()
 {
 }
