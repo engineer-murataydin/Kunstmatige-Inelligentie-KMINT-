@@ -1,5 +1,5 @@
 #include "Character.h"
-
+#include "CharacterBehaviour.h"
 
 Character::Character(Node* location)
 {
@@ -31,4 +31,10 @@ SDL_Texture* Character::LoadTexture()
 {
 	return FWApplication::GetInstance()->LoadTexture(textureName);
 }
+
+string Character::getState()
+{
+	return behaviour->getName();
+}
+
 

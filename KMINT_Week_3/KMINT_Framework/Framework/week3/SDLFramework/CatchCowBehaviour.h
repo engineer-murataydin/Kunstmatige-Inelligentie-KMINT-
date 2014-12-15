@@ -12,6 +12,7 @@ public:
 	void checkState();
 
 protected:
+	void virtual onExit();
 	Rabbit* character;
 };
 

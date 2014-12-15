@@ -12,6 +12,7 @@ SearchPillBehaviour::SearchPillBehaviour(Rabbit* character) : CharacterBehaviour
 	SDL_SetTextureColorMod(texture, 0, 100, 0);
 	character->SetTexture(texture);
 	this->character = character;
+	name = "SearchPill";
 }
 
 SearchPillBehaviour::~SearchPillBehaviour()
@@ -35,8 +36,10 @@ void SearchPillBehaviour::checkState()
 	if (character->getLocation() == character->getLocation()->graph->pill->getLocation())
 	{
 		character->setBehaviour(new WanderingBehaviour(character));
+
 		character->pill = character->getLocation()->graph->pill;
 		character->pill->setLocation(character->getLocation()->graph->outOfscreen);
+		character->getLocation()->graph->pill = nullptr;
 
 		delete this;
 	}

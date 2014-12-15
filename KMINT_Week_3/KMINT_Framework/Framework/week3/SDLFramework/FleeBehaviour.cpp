@@ -6,6 +6,7 @@
 FleeBehaviour::FleeBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
 	this->character = character;
+	name = "Flee";
 }
 
 FleeBehaviour::~FleeBehaviour()
@@ -14,14 +15,16 @@ FleeBehaviour::~FleeBehaviour()
 
 Node* FleeBehaviour::move()
 {
-	Node* from = character->getLocation();
-	Node* to = from->getRandomConnectedNode(); 
+	Node* location = character->getLocation();
+	Node* avoid = location->graph->cow->getLocation();
 
-	Node* location = Graph::CreatePath(from, to).top();
-
+	do
+	{
+		location = character->getLocation()->getRandomConnectedNode();
+	} while (location != avoid && location->edges.size() > 1);
 	character->setLocation(location);
 
-	return character->getLocation(); 
+	return character->getLocation();
 }
 
 void FleeBehaviour::checkState()

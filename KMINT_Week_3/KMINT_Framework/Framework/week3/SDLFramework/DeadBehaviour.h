@@ -15,6 +15,7 @@ private:
 	int	stepsLeft;
 
 protected:
+	void onExit();
 	Rabbit* character;
 };
 

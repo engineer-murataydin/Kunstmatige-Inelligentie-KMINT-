@@ -3,6 +3,8 @@
 #include "PathNode.h"
 #include <map>
 #include "FWApplication.h"
+#include <sstream>
+#include <string>
 
 Graph::Graph()
 {
@@ -107,6 +109,12 @@ void Graph::render()
 		}
 		FWApplication::GetInstance()->DrawRect(node->x, node->y, 20, 20, true);
 	}
+	stringstream r;
+	stringstream c;
+	r << "rabbit: " << rabbit->getState();
+	c << "cow   : " << cow->getState();
+	FWApplication::GetInstance()->DrawText(r.str(), 700, 10);
+	FWApplication::GetInstance()->DrawText(c.str(), 700, 25);
 }
 
 stack<Node*> Graph::CreatePath(Node* from, Node* to)

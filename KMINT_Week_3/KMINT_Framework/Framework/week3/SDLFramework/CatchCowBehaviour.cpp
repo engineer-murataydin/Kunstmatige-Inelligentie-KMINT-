@@ -2,14 +2,17 @@
 #include "Character.h"
 #include "Rabbit.h"
 #include "Graph.h"
+#include "WanderingBehaviour.h"
 
 CatchCowBehaviour::CatchCowBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
 	this->character = character;
+	name = "CatchCow";
 }
 
 CatchCowBehaviour::~CatchCowBehaviour()
 {
+
 }
 
 Node* CatchCowBehaviour::move()
@@ -34,9 +37,18 @@ void CatchCowBehaviour::checkState()
 		{
 			cow->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 
-			character->weapon->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
-			character->weapon = nullptr;
+			character->setBehaviour(new WanderingBehaviour(character));
+
+			delete this;
 			break;
 		}
 	}
+}
+
+void CatchCowBehaviour::onExit()
+{
+	Graph* graph = character->getLocation()->graph;
+	graph->weapon = character->weapon;
+	graph->weapon->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+	character->weapon = nullptr;
 }

@@ -10,6 +10,7 @@ SearchWeaponBehaviour::SearchWeaponBehaviour(Rabbit* character) : CharacterBehav
 	SDL_Texture* texture = character->LoadTexture();
 	SDL_SetTextureColorMod(texture, 100, 0, 0);
 	character->SetTexture(texture);
+	name = "SearchWeapon";
 }
 
 
@@ -33,8 +34,13 @@ void SearchWeaponBehaviour::checkState()
 {
 	if (character->getLocation() == character->getLocation()->graph->weapon->getLocation())
 	{
+		Graph* graph = character->getLocation()->graph;
+		character->weapon = graph->weapon;
+		graph->weapon = nullptr;
+		character->weapon->setLocation(graph->outOfscreen);
+
 		character->setBehaviour(new CatchCowBehaviour(character));
-		character->weapon = character->getLocation()->graph->weapon;
+
 		delete this;
 	}
 }

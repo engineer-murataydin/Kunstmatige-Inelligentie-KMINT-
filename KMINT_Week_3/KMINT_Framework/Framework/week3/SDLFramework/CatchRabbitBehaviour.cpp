@@ -5,11 +5,13 @@
 #include "Character.h"
 #include "Graph.h"
 
+
 CatchRabbitBehaviour::CatchRabbitBehaviour(Character* character) : CharacterBehaviour(character)
 {
 	SDL_Texture* texture = character->LoadTexture();
-	SDL_SetTextureColorMod(texture, 0, 0, 100);
+	//SDL_SetTextureColorMod(texture, 0, 0, 100);
 	character->SetTexture(texture);
+	name = "CatchRabbit";
 }
 
 CatchRabbitBehaviour::~CatchRabbitBehaviour()
@@ -36,6 +38,7 @@ void CatchRabbitBehaviour::checkState()
 		{
 			character->setBehaviour(new SleepingBehaviour(character));
 			Rabbit* rabbit = character->getLocation()->graph->rabbit;
+			rabbit->setBehaviour(new WanderingBehaviour(rabbit));
 			rabbit->pill->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 			rabbit->pill = nullptr;
 		}

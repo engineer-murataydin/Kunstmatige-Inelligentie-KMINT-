@@ -12,6 +12,8 @@ DeadBehaviour::DeadBehaviour(Rabbit* character) : CharacterBehaviour(character)
 	character->SetTexture(texture);
 
 	stepsLeft = 4;
+
+	name = "Dead";
 }
 
 DeadBehaviour::~DeadBehaviour()
@@ -28,7 +30,11 @@ void DeadBehaviour::checkState()
 {
 	if (stepsLeft <= 0)
 	{
-		character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 		character->setBehaviour(new WanderingBehaviour(character));
 	}
+}
+
+void DeadBehaviour::onExit()
+{
+	character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 }

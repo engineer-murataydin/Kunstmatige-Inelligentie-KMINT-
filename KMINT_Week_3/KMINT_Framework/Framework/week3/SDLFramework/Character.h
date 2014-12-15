@@ -17,6 +17,7 @@ public:
 	void setLocation(Node* location);
 	void setBehaviour(CharacterBehaviour* behaviour);
 	SDL_Texture* LoadTexture();
+	string getState();
 private:
 	Node* location;
 protected:

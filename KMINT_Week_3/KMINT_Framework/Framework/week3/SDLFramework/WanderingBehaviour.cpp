@@ -5,7 +5,6 @@
 #include "Character.h"
 #include "Rabbit.h"
 #include "Graph.h"
-
 #include <iostream>
 
 WanderingBehaviour::WanderingBehaviour(Rabbit* character) : CharacterBehaviour(character)
@@ -15,6 +14,7 @@ WanderingBehaviour::WanderingBehaviour(Rabbit* character) : CharacterBehaviour(c
 	SDL_Texture* texture = character->LoadTexture();
 	//SDL_SetTextureColorMod(texture, 0, 0, 0);
 	character->SetTexture(texture);
+	name = "Wandering";
 }
 
 WanderingBehaviour::~WanderingBehaviour()
@@ -39,7 +39,7 @@ void WanderingBehaviour::checkState()
 		int random = chanse(dre);
 		if (random <= character->chanseFlee)
 		{
-			character->setBehaviour(new FleeBehaviour(character)); 
+			character->setBehaviour(new FleeBehaviour(character));
 			character->setChanse(&character->chanseFlee, &character->chanseSleepingPill, &character->chanseWeapon);
 		}
 		else if (random <= character->chanseFlee + character->chanseSleepingPill)
