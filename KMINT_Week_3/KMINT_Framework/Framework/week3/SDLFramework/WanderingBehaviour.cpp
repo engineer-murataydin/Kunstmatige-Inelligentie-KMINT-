@@ -39,7 +39,7 @@ void WanderingBehaviour::checkState()
 		int random = chanse(dre);
 		if (random <= character->chanseFlee)
 		{
-			character->setBehaviour(new FleeBehaviour(character));//todo fix
+			character->setBehaviour(new FleeBehaviour(character)); 
 			character->setChanse(&character->chanseFlee, &character->chanseSleepingPill, &character->chanseWeapon);
 		}
 		else if (random <= character->chanseFlee + character->chanseSleepingPill)
@@ -53,9 +53,11 @@ void WanderingBehaviour::checkState()
 			character->setChanse(&character->chanseWeapon, &character->chanseFlee, &character->chanseSleepingPill);
 		}
 
+		cout << "Nieuwe Kansen:" << endl;
 		cout << "flee : " << character->chanseFlee << endl;
 		cout << "pill : " << character->chanseSleepingPill << endl;
 		cout << "weap : " << character->chanseWeapon << endl;
+		cout << "\n" << endl;
 
 		delete this;
 	}
