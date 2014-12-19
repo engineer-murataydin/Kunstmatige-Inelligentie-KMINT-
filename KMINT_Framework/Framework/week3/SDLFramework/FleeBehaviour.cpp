@@ -18,11 +18,24 @@ Node* FleeBehaviour::move()
 	Node* location = character->getLocation();
 	Node* avoid = location->graph->cow->getLocation();
 
-	do
+	vector<Node*> connected = location->getConnectedNodes();
+
+	while (connected.size() > 1)
 	{
-		location = character->getLocation()->getRandomConnectedNode();
-	} while (location != avoid && location->edges.size() > 1);
-	character->setLocation(location);
+		uniform_int_distribution<int> dist(0, connected.size() - 1);
+		int random = dist(FWApplication::GetInstance()->dre);
+
+		Node* found = connected[random];
+		if (found == avoid)
+		{
+			connected.erase(connected.begin() + random);
+		}
+		else
+		{
+			character->setLocation(location);
+			break;
+		}
+	}
 
 	return character->getLocation();
 }

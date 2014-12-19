@@ -8,6 +8,7 @@ Cow::Cow(Node* location) : Character(location)
 	SetTexture(LoadTexture());
 	SetSize(50, 50);
 	behaviour = new CatchRabbitBehaviour(this);
+	name = "Cow";
 }
 
 Cow::~Cow()
@@ -23,4 +24,9 @@ void Cow::Update(float deltaTime)
 Node* Cow::move()
 {
 	return behaviour->move();
+}
+
+bool Cow::isHunting()
+{
+	return behaviour->getName() == "CatchRabbit";
 }

@@ -5,6 +5,7 @@
 SleepingBehaviour::SleepingBehaviour(Character* character) : CharacterBehaviour(character)
 {
 	count = 5;
+	name = "Sleeping";
 }
 
 SleepingBehaviour::~SleepingBehaviour()
@@ -13,15 +14,15 @@ SleepingBehaviour::~SleepingBehaviour()
 
 Node* SleepingBehaviour::move()
 {
+	count--;
 	return character->getLocation();
 }
 
 void SleepingBehaviour::checkState()
 {
-	count--;
-
 	if (count <= 0)
 	{
 		character->setBehaviour(new CatchRabbitBehaviour(character));
+		delete this;
 	}
 }

@@ -8,11 +8,13 @@ Rabbit::Rabbit(Node* location) :Character(location)
 	SetTexture(LoadTexture());
 	SetSize(50, 50);
 
-	behaviour = new WanderingBehaviour(this);
+	name = "Rabbit";
 
 	chanseFlee = 33;
 	chanseSleepingPill = 33;
 	chanseWeapon = 33;
+
+	behaviour = new WanderingBehaviour(this);
 }
 
 Rabbit::~Rabbit()

@@ -13,7 +13,6 @@ public:
 	void checkState();
 
 protected:
-	virtual void onExit();
 	Rabbit* character;
 };
 

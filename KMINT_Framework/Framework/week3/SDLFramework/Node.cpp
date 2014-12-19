@@ -7,8 +7,6 @@ Node::Node(float x, float y, Graph* graph)
 	this->x = x;
 	this->y = y;
 	this->graph = graph;
-
-	dre = default_random_engine(random_device()());
 }
 
 
@@ -42,7 +40,7 @@ bool Node::delEdge(Edge* edge)
 Node* Node::getRandomConnectedNode()
 {
 	uniform_int_distribution<int> arrayDist = uniform_int_distribution<int>(0, edges.size() - 1);
-	int pos = arrayDist(dre);
+	int pos = arrayDist(FWApplication::GetInstance()->dre);
 	return edges[pos]->getOtherNode(this);
 	return NULL;
 }
@@ -58,4 +56,14 @@ Node* Node::getRandomConnectedNode(Node* node, int times)
 	{
 		return node;
 	}
+}
+
+vector<Node*> Node::getConnectedNodes()
+{
+	vector<Node*> connected;
+	for (size_t i = 0; i < edges.size(); i++)
+	{
+		connected.push_back(edges[i]->getOtherNode(this));
+	}
+	return connected;
 }

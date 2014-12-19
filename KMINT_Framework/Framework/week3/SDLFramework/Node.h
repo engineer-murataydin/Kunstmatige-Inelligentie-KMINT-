@@ -24,9 +24,7 @@ public:
 
 	Node* getRandomConnectedNode();
 	static Node* getRandomConnectedNode(Node* node, int times);
-
+	vector<Node*> getConnectedNodes();
 	vector<Edge*> edges;
-
-	default_random_engine dre;
 };
 

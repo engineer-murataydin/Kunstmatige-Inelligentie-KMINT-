@@ -2,6 +2,7 @@
 #include "CharacterBehaviour.h"
 
 class Rabbit;
+class Cow;
 
 class WanderingBehaviour :
 	public CharacterBehaviour
@@ -15,7 +16,10 @@ public:
 protected:
 	default_random_engine dre;
 	uniform_int_distribution<int> chanse;
-	Rabbit* character; //check!!------------------------------------------------------------------------------------
+	Rabbit* character;
+	virtual void onExit();
 
+private:
+	Cow* hunter;
 };
 

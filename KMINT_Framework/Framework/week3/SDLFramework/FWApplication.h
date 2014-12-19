@@ -3,6 +3,7 @@
 #include <functional>
 #include <cstdint>
 #include <vector>
+#include <random>
 
 class IGameObject;
 struct SDL_Renderer;
@@ -44,6 +45,9 @@ struct Color
 class FWApplication
 {
 public:
+
+	std::default_random_engine dre;
+
 	FWApplication(int offsetX = 50, int offsetY = 50, int width = 800, int height = 600);
 	~FWApplication();
 

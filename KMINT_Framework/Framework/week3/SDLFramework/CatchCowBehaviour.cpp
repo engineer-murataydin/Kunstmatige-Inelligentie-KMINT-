@@ -1,8 +1,10 @@
 #include "CatchCowBehaviour.h"
+#include "SleepingBehaviour.h"
 #include "Character.h"
 #include "Rabbit.h"
 #include "Graph.h"
 #include "WanderingBehaviour.h"
+#include "DeadBehaviour.h"
 
 CatchCowBehaviour::CatchCowBehaviour(Rabbit* character) : CharacterBehaviour(character)
 {
@@ -12,7 +14,7 @@ CatchCowBehaviour::CatchCowBehaviour(Rabbit* character) : CharacterBehaviour(cha
 
 CatchCowBehaviour::~CatchCowBehaviour()
 {
-
+	onExit();
 }
 
 Node* CatchCowBehaviour::move()
@@ -35,9 +37,10 @@ void CatchCowBehaviour::checkState()
 	{
 		if (edges[i]->getOtherNode(character->getLocation()) == cow->getLocation())
 		{
-			cow->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+			cow->setBehaviour(new DeadBehaviour(cow));
 
 			character->setBehaviour(new WanderingBehaviour(character));
+
 
 			delete this;
 			break;

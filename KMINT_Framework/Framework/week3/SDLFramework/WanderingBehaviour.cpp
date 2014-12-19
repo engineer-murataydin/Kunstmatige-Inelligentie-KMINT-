@@ -4,6 +4,7 @@
 #include "FleeBehaviour.h"
 #include "Character.h"
 #include "Rabbit.h"
+#include "Cow.h"
 #include "Graph.h"
 #include <iostream>
 
@@ -15,10 +16,12 @@ WanderingBehaviour::WanderingBehaviour(Rabbit* character) : CharacterBehaviour(c
 	//SDL_SetTextureColorMod(texture, 0, 0, 0);
 	character->SetTexture(texture);
 	name = "Wandering";
+	hunter = character->getLocation()->graph->cow;
 }
 
 WanderingBehaviour::~WanderingBehaviour()
 {
+	onExit();
 }
 
 Node* WanderingBehaviour::move()
@@ -34,7 +37,7 @@ Node* WanderingBehaviour::move()
 
 void WanderingBehaviour::checkState()
 {
-	if (!character->pill)
+	if (!character->pill && hunter->isHunting())
 	{
 		int random = chanse(dre);
 		if (random <= character->chanseFlee)
@@ -60,5 +63,21 @@ void WanderingBehaviour::checkState()
 		cout << "\n" << endl;
 
 		delete this;
+	}
+}
+
+void WanderingBehaviour::onExit()
+{
+	if (character->pill)
+	{
+		character->getLocation()->graph->pill = character->pill;
+		character->pill->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		character->pill = nullptr;
+	}
+	if (character->weapon)
+	{
+		character->getLocation()->graph->weapon = character->weapon;
+		character->weapon->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+		character->weapon = nullptr;
 	}
 }

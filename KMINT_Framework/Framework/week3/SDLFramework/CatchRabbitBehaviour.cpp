@@ -37,16 +37,17 @@ void CatchRabbitBehaviour::checkState()
 		if (character->getLocation()->graph->rabbit->pill)
 		{
 			character->setBehaviour(new SleepingBehaviour(character));
+
 			Rabbit* rabbit = character->getLocation()->graph->rabbit;
-			rabbit->setBehaviour(new WanderingBehaviour(rabbit));
 			rabbit->pill->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+			character->getLocation()->graph->pill = rabbit->pill;
 			rabbit->pill = nullptr;
 		}
 		else
 		{
 			Rabbit* rabbit = character->getLocation()->graph->rabbit;
-			rabbit->setBehaviour(new WanderingBehaviour(rabbit));
-			character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
+			rabbit->setBehaviour(new DeadBehaviour(rabbit));
+			rabbit->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 		}
 	}
 }

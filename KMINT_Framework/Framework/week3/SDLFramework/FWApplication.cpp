@@ -19,6 +19,7 @@ FWApplication::FWApplication(int offsetX, int offsetY, int width, int height)
 	mFontName("")
 	//mTextBackgroundColor(0xFF,0xFF,0xFF,0xFF)
 {
+	dre = std::default_random_engine(std::random_device()());
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		LOG("SDL init failed");

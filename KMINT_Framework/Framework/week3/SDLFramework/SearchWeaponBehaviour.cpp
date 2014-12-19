@@ -32,7 +32,7 @@ Node* SearchWeaponBehaviour::move()
 
 void SearchWeaponBehaviour::checkState()
 {
-	if (character->getLocation() == character->getLocation()->graph->weapon->getLocation())
+	if (character->weapon || character->getLocation() == character->getLocation()->graph->weapon->getLocation())
 	{
 		Graph* graph = character->getLocation()->graph;
 		character->weapon = graph->weapon;

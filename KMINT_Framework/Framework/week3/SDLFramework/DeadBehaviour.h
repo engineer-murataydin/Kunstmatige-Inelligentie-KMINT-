@@ -5,7 +5,7 @@ class Rabbit;
 class DeadBehaviour : public CharacterBehaviour
 {
 public:
-	DeadBehaviour(Rabbit* character);
+	DeadBehaviour(Character* character);
 	~DeadBehaviour();
 
 	Node* move();
@@ -16,6 +16,5 @@ private:
 
 protected:
 	void onExit();
-	Rabbit* character;
 };
 

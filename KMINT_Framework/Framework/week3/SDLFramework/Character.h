@@ -2,6 +2,7 @@
 
 #include "Node.h"
 #include "IGameObject.h"
+#include "Item.h"
 #include <string>
 
 class CharacterBehaviour;
@@ -18,9 +19,11 @@ public:
 	void setBehaviour(CharacterBehaviour* behaviour);
 	SDL_Texture* LoadTexture();
 	string getState();
+	string getName();
 private:
 	Node* location;
 protected:
+	string name;
 	CharacterBehaviour* behaviour;
 	string textureName;
 };

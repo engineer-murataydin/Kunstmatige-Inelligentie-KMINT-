@@ -53,8 +53,8 @@ Graph::Graph()
 
 	FWApplication* application = FWApplication::GetInstance();
 
-	application->AddRenderable(cow);
 	application->AddRenderable(rabbit);
+	application->AddRenderable(cow);
 	application->AddRenderable(pill);
 	application->AddRenderable(weapon);
 }
@@ -92,7 +92,6 @@ void Graph::step()
 {
 	cow->move();
 	rabbit->move();
-
 }
 
 

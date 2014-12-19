@@ -4,6 +4,7 @@
 Character::Character(Node* location)
 {
 	setLocation(Node::getRandomConnectedNode(location, 100));
+	name = "?";
 }
 
 
@@ -37,4 +38,7 @@ string Character::getState()
 	return behaviour->getName();
 }
 
-
+string Character::getName()
+{
+	return name;
+}
