@@ -37,7 +37,7 @@ void DeadBehaviour::checkState()
 		}
 		else
 		{
-			character->setBehaviour(new CatchRabbitBehaviour(character));
+			character->setBehaviour(new CatchRabbitBehaviour(dynamic_cast<Cow*>(character)));
 		}
 	}
 }

@@ -1,6 +1,8 @@
 #include "Character.h"
 #include "CharacterBehaviour.h"
 #include "Field.h"
+#include "Utill.h"
+#include "Cow.h"
 
 Character::Character(Field* field, Vector2* location) : name("?"), field(field)
 {
@@ -35,10 +37,10 @@ void Character::setLocation(Vector2* location)
 
 	this->location->setX(location->getX());
 	this->location->setY(location->getY());
-	SetOffset(this->location->getX(), this->location->getY());
+	SetOffset(location->getX(), location->getY());
 }
 
-Vector2* Character::getLocation()
+Vector2* Character::getLocation() const
 {
 	return location;
 }
@@ -53,12 +55,12 @@ SDL_Texture* Character::LoadTexture()
 	return FWApplication::GetInstance()->LoadTexture(textureName);
 }
 
-string Character::getState()
+string Character::getState() const
 {
 	return behaviour->getName();
 }
 
-string Character::getName()
+string Character::getName() const
 {
 	return name;
 }
@@ -101,4 +103,22 @@ void Character::applyForce(Vector2 force)
 	{
 		velocity.normalize(maxSpeed);
 	}
+}
+
+vector<Cow*> Character::getCowsInRange() const
+{
+	vector<Cow*> cowsInRange;
+	vector<Cow*> cows = field->getCows();
+
+	for (size_t i = 0; i < cows.size(); i++)
+	{
+		if (Utill::distanceBewteenPoints(*cows[i]->getLocation(), *getLocation()) < viewDistance)
+		{
+			if (cows[i] != this)
+			{
+				cowsInRange.push_back(cows[i]);
+			}
+		}
+	}
+	return cowsInRange;
 }

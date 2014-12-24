@@ -22,7 +22,7 @@ FleeBehaviour::~FleeBehaviour()
 Vector2* FleeBehaviour::move()
 {
 	Vector2 avoid;
-	vector<Cow*> cowsInRange = getCowsInRange();
+	vector<Cow*> cowsInRange = character->getCowsInRange();
 	if (cowsInRange.size() > 0)
 	{
 		for (size_t i = 0; i < cowsInRange.size(); i++)
@@ -31,38 +31,21 @@ Vector2* FleeBehaviour::move()
 		}
 
 		avoid = avoid / cowsInRange.size();
+		FWApplication::GetInstance()->DrawRect(avoid.getX(), avoid.getY(), 10, 10, true);
 
 		Vector2 move = (avoid - *character->getLocation()) * -1;
 		move.normalize();
 
 		move = move * character->maxTurnRate;
 
-		std::cout << move.getX() << ',' << move.getY() << endl;
-
 		character->applyForce(move);
 	}
 	return character->getLocation();
 }
 
-vector<Cow*> FleeBehaviour::getCowsInRange()
-{
-	vector<Cow*> cowsInRange;
-	vector<Cow*> cows = character->getField()->getCows();
-
-	for (size_t i = 0; i < cows.size(); i++)
-	{
-		if (Utill::distanceBewteenPoints(*cows[i]->getLocation(), *character->getLocation()) < character->viewDistance)
-		{
-			cowsInRange.push_back(cows[i]);
-		}
-	}
-	return cowsInRange;
-}
-
-
 void FleeBehaviour::checkState()
 {
-	if (getCowsInRange().size() == 0)
+	if (character->getCowsInRange().size() == 0)
 	{
 		character->setBehaviour(new WanderingBehaviour(character));
 		delete this;

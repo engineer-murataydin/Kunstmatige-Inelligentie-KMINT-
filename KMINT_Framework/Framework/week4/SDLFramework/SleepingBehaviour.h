@@ -4,10 +4,12 @@
 class SleepingBehaviour : public CharacterBehaviour
 {
 public:
-	SleepingBehaviour(Character* character);
+	SleepingBehaviour(Cow* character);
 	~SleepingBehaviour();
 	Vector2* move();
 	void checkState();
 	int count;
+protected:
+	Cow* character;
 };
 

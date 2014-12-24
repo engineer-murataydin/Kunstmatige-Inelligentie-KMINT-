@@ -1,9 +1,11 @@
 #include "SleepingBehaviour.h"
 #include "CatchRabbitBehaviour.h"
-#include "Character.h"
+#include "Cow.h"
 
-SleepingBehaviour::SleepingBehaviour(Character* character) : CharacterBehaviour(character)
+
+SleepingBehaviour::SleepingBehaviour(Cow* character) : CharacterBehaviour(character)
 {
+	this->character = character;
 	count = 5;
 	name = "Sleeping";
 }

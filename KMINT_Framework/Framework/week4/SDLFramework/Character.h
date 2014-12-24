@@ -5,6 +5,7 @@
 #include "Item.h"
 #include <string>
 
+class Cow;
 class Field;
 class CharacterBehaviour;
 
@@ -17,12 +18,12 @@ public:
 	virtual ~Character();
 
 	virtual Vector2* move();
-	Vector2* getLocation();
+	Vector2* getLocation() const;
 	void setLocation(Vector2* location);
 	void setBehaviour(CharacterBehaviour* behaviour);
 	SDL_Texture* LoadTexture();
-	string getState();
-	string getName();
+	string getState() const;
+	string getName() const;
 	virtual void Update(float deltaTime);
 	virtual void applyForce(Vector2 force);
 
@@ -39,6 +40,8 @@ public:
 	double viewDistance;
 	Vector2* location;
 	Field* getField() const;
+
+	vector<Cow*> getCowsInRange() const;
 
 protected:
 	Field* field;

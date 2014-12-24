@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	int offsetX = 50, offsetY = 50, width = 800, height = 600;
 	auto application = new FWApplication(offsetX, offsetY, width, height);
 	Field field(width, height);
-	field.init();
+	field.init(5);
 	if (!application->GetWindow())
 	{
 		LOG("Couldn't create window...");

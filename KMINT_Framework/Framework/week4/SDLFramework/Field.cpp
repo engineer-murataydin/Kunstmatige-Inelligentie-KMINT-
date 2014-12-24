@@ -1,4 +1,5 @@
 #include "Field.h"
+#include "Utill.h"
 
 Field::Field(double width, double height) :width(width), height(height)
 {
@@ -33,11 +34,14 @@ void Field::addCow(Cow* cow)
 void Field::init(int cowAmount)
 {
 	FWApplication* app = FWApplication::GetInstance();
-	rabbit = new Rabbit(this, new Vector2{ width / 2, height / 2 });
+	//rabbit = new Rabbit(this, new Vector2{ width / 2, height / 2 });
+	rabbit = new Rabbit(this, new Vector2{ 1, 1 });
 	app->AddRenderable(rabbit);
 	for (int i = 0; i < cowAmount; i++)
 	{
-		addCow(new Cow(this, new Vector2{ 100, 100 }));
+		double y = height - 10 + i * 10;
+		double x = width - 10 - i * 10;
+		addCow(new Cow(this, new Vector2{ y, x }));
 		app->AddRenderable(cows[cows.size() - 1]);
 	}
 }

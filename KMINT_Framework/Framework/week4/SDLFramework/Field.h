@@ -19,6 +19,8 @@ public:
 	vector<Cow*> getCows() const;
 	Rabbit* getRabbit() const;
 	void init(int cowAmount = 1);
+
+
 private:
 	vector<Cow*> cows;
 	Rabbit* rabbit;

@@ -10,7 +10,7 @@ public:
 	Cow(Field* field, Vector2* location);
 	~Cow();
 
-	stack<Vector2*> path;
+	double minDistance;
 private:
 };
 

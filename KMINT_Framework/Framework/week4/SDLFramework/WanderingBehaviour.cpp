@@ -52,6 +52,7 @@ void WanderingBehaviour::checkState()
 		{
 			character->setBehaviour(new FleeBehaviour(character));
 			delete this;
+			break;
 		}
 	}
 }

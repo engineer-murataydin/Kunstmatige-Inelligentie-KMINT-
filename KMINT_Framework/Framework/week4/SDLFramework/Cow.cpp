@@ -11,6 +11,8 @@ Cow::Cow(Field* field, Vector2* location) : Character(field, location)
 	maxSpeed = 5;
 	maxTurnRate = 1;
 	mass = 10;
+	minDistance = 1;
+	viewDistance = 50;
 }
 
 Cow::~Cow()

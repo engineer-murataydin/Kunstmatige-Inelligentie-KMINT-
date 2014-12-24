@@ -14,6 +14,5 @@ public:
 	virtual void onEnter();
 protected:
 	Rabbit* character;
-	vector<Cow*> getCowsInRange();
 };
 
