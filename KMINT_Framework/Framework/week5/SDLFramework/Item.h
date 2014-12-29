@@ -1,17 +1,15 @@
 #pragma once
-#include "IGameObject.h"
+#include "GameObject.h"
 #include "Vector2.h"
+#include "Field.h"
 
 class Item :
-	public IGameObject
+	public GameObject
 {
 public:
-	Item(Vector2* location);
+	Item(Field* field, Vector2 location);
 	~Item();
 	void Update(float deltatime);
-	Vector2* getLocation();
-	void setLocation(Vector2* location);
 protected:
-	Vector2* location;
 };
 

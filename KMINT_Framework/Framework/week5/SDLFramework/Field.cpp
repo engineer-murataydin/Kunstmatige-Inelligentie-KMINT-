@@ -1,5 +1,11 @@
 #include "Field.h"
 #include "Utill.h"
+#include "WanderingBehaviour.h"
+#include "Rabbit.h"
+#include "Cow.h"
+#include "Weapon.h"
+#include "Pill.h"
+#include "Dna.h"
 
 Field::Field(double width, double height, SDL_Color color) :width(width), height(height), color(color)
 {
@@ -13,9 +19,9 @@ Field::~Field()
 }
 
 
-vector<Cow*> Field::getCows() const
+Cow* Field::getCow() const
 {
-	return cows;
+	return cow;
 }
 
 Rabbit* Field::getRabbit() const
@@ -38,29 +44,54 @@ void Field::setRabbit(Rabbit* rabbit)
 	this->rabbit = rabbit;
 }
 
-void Field::addCow(Cow* cow)
+void Field::setCow(Cow* cow)
 {
-	cows.push_back(cow);
+	this->cow = cow;
 }
 
 void Field::init()
 {
 	FWApplication* app = FWApplication::GetInstance();
-	rabbit = new Rabbit(this, new Vector2(spawnRabbit), color);
+
+	uniform_int_distribution<int> widthDist(0, width);
+	uniform_int_distribution<int> heightDist(0, height);
+
+	rabbit = new Rabbit(this, spawnRabbit, color);
 	app->AddRenderable(rabbit);
 
-	addCow(new Cow(this, new Vector2(spawnCow), Dna(), color));
-	app->AddRenderable(cows[cows.size() - 1]);
+	cow = new Cow(this, spawnCow, Dna(), color);
+	app->AddRenderable(cow);
 
+	pill = new Pill(this, Vector2(heightDist(app->dre), widthDist(app->dre)), color);
+	app->AddRenderable(pill);
 
+	weapon = new Weapon(this, Vector2(heightDist(app->dre), widthDist(app->dre)), color);
+	app->AddRenderable(weapon);
 }
 
 
 void Field::restart()
 {
-	rabbit->setLocation(&spawnRabbit);
-	for (size_t i = 0; i < cows.size(); i++)
-	{
-		cows[i]->setLocation(&spawnCow);
-	}
+	rabbit->reset(spawnRabbit);
+	cow->reset(spawnCow);
+}
+
+int Field::getScore() const
+{
+	return cow->getScore() - rabbit->getScore();
+}
+
+void Field::reset(Dna* dna)
+{
+	cow->dna = *dna;
+	cow->reset();
+	rabbit->reset();
+	restart();
+
+	uniform_int_distribution<int> widthDist(0, width);
+	uniform_int_distribution<int> heightDist(0, height);
+
+	pill->setLocation(Vector2(heightDist(FWApplication::GetInstance()->dre), widthDist(FWApplication::GetInstance()->dre)));
+	weapon->setLocation(Vector2(heightDist(FWApplication::GetInstance()->dre), widthDist(FWApplication::GetInstance()->dre)));
+
 }

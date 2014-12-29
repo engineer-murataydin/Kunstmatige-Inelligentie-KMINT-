@@ -1,31 +1,33 @@
 #pragma once
 
 #include "Vector2.h"
-#include "IGameObject.h"
+#include "GameObject.h"
 #include "Item.h"
 #include <string>
 
 class Cow;
-class Field;
 class CharacterBehaviour;
 
 using namespace std;
 
-class Character : public IGameObject
+class Character : public GameObject
 {
 public:
-	Character(Field* field, Vector2* location, SDL_Color color);
+	Character(Field* field, Vector2 location, SDL_Color color);
 	virtual ~Character();
 
 	virtual Vector2* move();
-	Vector2* getLocation() const;
-	void setLocation(Vector2* location);
 	void setBehaviour(CharacterBehaviour* behaviour);
 	SDL_Texture* LoadTexture();
 	string getState() const;
 	string getName() const;
 	virtual void Update(float deltaTime);
 	virtual void applyForce(Vector2 force);
+
+	virtual void reset(Vector2 pos);
+
+	void addScore(int amount);
+	int getScore();
 
 	Vector2 velocity;
 	Vector2 heading;
@@ -39,19 +41,17 @@ public:
 
 	SDL_Color color;
 
-	int score;
 
 	double viewDistance;
-	Vector2* location;
-	Field* getField() const;
 
-	vector<Cow*> getCowsInRange() const;
+	bool collideWith(GameObject* character);
 
+	virtual void reset();
 protected:
-	Field* field;
 	string name;
 	CharacterBehaviour* behaviour;
 	string textureName;
+	int score;
 
 	void rotate(double deg);
 };

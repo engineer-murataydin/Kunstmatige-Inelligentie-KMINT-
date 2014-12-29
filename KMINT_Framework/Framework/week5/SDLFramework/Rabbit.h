@@ -7,7 +7,7 @@ class Rabbit :
 	public Character
 {
 public:
-	Rabbit(Field* field, Vector2* location, SDL_Color color);
+	Rabbit(Field* field, Vector2 location, SDL_Color color);
 	~Rabbit();
 };
 

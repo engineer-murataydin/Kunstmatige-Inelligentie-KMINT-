@@ -1,10 +1,14 @@
 #pragma once
 
 #include <vector>
-#include "Rabbit.h"
-#include "Cow.h"
-#include "Weapon.h"
-#include "Pill.h"
+#include <SDL.h>
+#include "Vector2.h"
+
+class Cow;
+class Rabbit;
+class Weapon;
+class Pill;
+class Dna;
 
 class Field
 {
@@ -17,9 +21,9 @@ public:
 	const SDL_Color color;
 
 	void setRabbit(Rabbit* rabbit);
-	void addCow(Cow* cow);
+	void setCow(Cow* cow);
 
-	vector<Cow*> getCows() const;
+	Cow* getCow() const;
 	Rabbit* getRabbit() const;
 	Pill* getPill() const;
 	Weapon* getWeapon() const;
@@ -30,8 +34,11 @@ public:
 	Vector2 spawnRabbit;
 	Vector2 spawnCow;
 
+	int getScore() const;
+
+	void reset(Dna* dna);
 private:
-	vector<Cow*> cows;
+	Cow* cow;
 	Rabbit* rabbit;
 	Pill* pill;
 	Weapon* weapon;

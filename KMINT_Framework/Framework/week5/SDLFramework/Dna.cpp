@@ -1,53 +1,45 @@
 #include "Dna.h"
 #include "FWApplication.h"
 #include <random>
+#include <sstream>
 
-using namespace std;
 
-Dna::Dna(int flee, int pill, int hide, int weapon)
+Dna::Dna(double* dna, int size) :size(size), dna(dna)
 {
-	normalize(flee, pill, hide, weapon);
+	normalize();
 }
 
-Dna::Dna()
+Dna::Dna() : size(4)
 {
 	uniform_int_distribution<int> dist(10, 30);
-	default_random_engine dre = FWApplication::GetInstance()->dre;
-	normalize(dist(dre), dist(dre), dist(dre), dist(dre));
+	dna = new double[size];
+	for (int i = 0; i < size; i++)
+	{
+		dna[i] = dist(FWApplication::GetInstance()->dre);
+	}
+	normalize();
+
 }
 
 Dna::~Dna()
 {
 }
 
-void Dna::normalize(int flee, int pill, int hide, int weapon)
+void Dna::normalize()
 {
-	int total = flee + pill + hide + weapon;
-	this->flee = flee / total * 100;
-	this->pill = pill / total * 100;
-	this->hide = hide / total * 100;
-	this->weapon = weapon / total * 100;
+	double total = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		total += dna[i];
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		dna[i] = dna[i] / total * 100;
+	}
 }
 
-int Dna::getFlee() const
-{
-	return flee;
-}
-
-int Dna::getPill() const
-{
-	return pill;
-}
-
-int Dna::getHide() const
-{
-	return hide;
-}
-
-int Dna::getWeapon() const
-{
-	return weapon;
-}
 
 void Dna::mate(Dna* one, Dna* two, Dna* childOne, Dna* childTwo)
 {
@@ -56,34 +48,36 @@ void Dna::mate(Dna* one, Dna* two, Dna* childOne, Dna* childTwo)
 
 	int pos = dist(FWApplication::GetInstance()->dre);
 
-	vector<int> DnaOne = one->toArray();
-	vector<int> DnaTwo = two->toArray();
+	double* DnaOne = one->dna;
+	double* DnaTwo = two->dna;
 
-	vector<int> childOneList;
-	vector<int> childTwoList;
-	for (size_t i = 0; i < DnaOne.size(); i++)
+	for (size_t i = 0; i < one->size; i++)
 	{
 		if (i == pos)
 		{
-			vector<int> temp = DnaOne;
+			double* temp = DnaOne;
 			DnaOne = DnaTwo;
 			DnaTwo = temp;
 		}
-		childOneList.push_back(DnaOne[i]);
-		childTwoList.push_back(DnaTwo[i]);
+		childOne->dna[i] = DnaOne[i];
+		childTwo->dna[i] = DnaTwo[i];
 	}
-	childOne = new Dna(childOneList[0], childOneList[1], childOneList[2], childOneList[3]);
-	childTwo = new Dna(childTwoList[0], childTwoList[1], childTwoList[2], childTwoList[3]);
+	childOne->normalize();
+	childTwo->normalize();
 }
 
-vector<int> Dna::toArray()
+
+double* Dna::getDna() const
 {
-	vector<int> list;
-	list.push_back(flee);
-	list.push_back(pill);
-	list.push_back(hide);
-	list.push_back(weapon);
-
-	return list;
+	return dna;
 }
 
+string Dna::toString()
+{
+	stringstream ss;
+	for (int i = 0; i < size; i++)
+	{
+		ss << i + 1 << ": " << dna[i] << ", ";
+	}
+	return ss.str();
+}

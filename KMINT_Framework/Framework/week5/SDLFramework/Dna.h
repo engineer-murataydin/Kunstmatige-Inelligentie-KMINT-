@@ -1,29 +1,24 @@
 #pragma once
 #include <vector>
+#include <string>
 
 using namespace std;
 
 class Dna
 {
 public:
-	Dna(int flee, int pill, int hide, int weapon);
+	Dna(double* dna, int size);
 	Dna();
 	~Dna();
 
-	int getFlee() const;
-	int	getPill() const;
-	int	getHide() const;
-	int	getWeapon() const;
+	static void mate(Dna* one, Dna* two, Dna* childOne, Dna* childTwo);
+	double* getDna() const;
 
-	void mate(Dna* one, Dna* two, Dna* childOne, Dna* childTwo);
-
+	string toString();
 private:
-	void normalize(int flee, int pill, int hide, int weapon);
-	vector<int> toArray();
+	void normalize();
 
-	int flee;
-	int pill;
-	int hide;
-	int weapon;
+	int size;
+	double* dna;
 };
 

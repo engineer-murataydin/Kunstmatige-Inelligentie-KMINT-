@@ -4,7 +4,7 @@
 class Weapon : public Item
 {
 public:
-	Weapon(Vector2* position, SDL_Color color);
+	Weapon(Field* field, Vector2 position, SDL_Color color);
 	~Weapon();
 };
 

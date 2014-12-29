@@ -1,13 +1,11 @@
 #include "Character.h"
 #include "CharacterBehaviour.h"
-#include "Field.h"
 #include "Utill.h"
 #include "Cow.h"
 #include <SDL.h>
 
-Character::Character(Field* field, Vector2* location, SDL_Color color) : name("?"), field(field), color(color)
+Character::Character(Field* field, Vector2 location, SDL_Color color) : GameObject(field), name("?"), color(color)
 {
-	this->location = new Vector2();
 	setLocation(location);
 	heading = Vector2(1, 0);
 	side = Vector2(0, 1);
@@ -21,30 +19,6 @@ Character::Character(Field* field, Vector2* location, SDL_Color color) : name("?
 
 Character::~Character()
 {
-}
-
-void Character::setLocation(Vector2* location)
-{
-	while (location->getX() < 0)
-	{
-		location->setX(location->getX() + field->width);
-	}
-	while (location->getY() < 0)
-	{
-		location->setY(location->getY() + field->height);
-	}
-
-	location->setX(fmod(location->getX(), field->width));
-	location->setY(fmod(location->getY(), field->height));
-
-	this->location->setX(location->getX());
-	this->location->setY(location->getY());
-	SetOffset(location->getX(), location->getY());
-}
-
-Vector2* Character::getLocation() const
-{
-	return location;
 }
 
 void Character::setBehaviour(CharacterBehaviour* behaviour)
@@ -82,7 +56,7 @@ Vector2* Character::move()
 {
 	behaviour->move();
 	Vector2 newLocation = *location + velocity;
-	setLocation(&newLocation);
+	setLocation(newLocation);
 	return location;
 }
 
@@ -91,10 +65,6 @@ void Character::rotate(double deg)
 {
 	heading.rotate(deg);
 	side.rotate(deg);
-}
-Field* Character::getField() const
-{
-	return field;
 }
 
 void Character::applyForce(Vector2 force)
@@ -111,20 +81,38 @@ void Character::applyForce(Vector2 force)
 	}
 }
 
-vector<Cow*> Character::getCowsInRange() const
+void Character::reset(Vector2 pos)
 {
-	vector<Cow*> cowsInRange;
-	vector<Cow*> cows = field->getCows();
+	setLocation(pos);
+	velocity = Vector2();
+}
 
-	for (size_t i = 0; i < cows.size(); i++)
+bool Character::collideWith(GameObject* object)
+{
+	if (object == this)
 	{
-		if (Utill::distanceBewteenPoints(*cows[i]->getLocation(), *getLocation()) < viewDistance)
-		{
-			if (cows[i] != this)
-			{
-				cowsInRange.push_back(cows[i]);
-			}
-		}
+		return false;
 	}
-	return cowsInRange;
+
+	return Utill::distanceBewteenPoints(*getLocation(), *object->getLocation()) < 50;
+}
+
+int Character::getScore()
+{
+	return score;
+}
+
+void Character::addScore(int amount)
+{
+	if (amount < 0)
+	{
+		return;
+	}
+	score += amount;
+}
+
+void Character::reset()
+{
+	score = 0;
+	velocity = Vector2();
 }

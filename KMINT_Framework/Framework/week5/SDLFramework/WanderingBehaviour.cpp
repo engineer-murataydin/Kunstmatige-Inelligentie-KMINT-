@@ -1,6 +1,7 @@
 #include "WanderingBehaviour.h"
 #include "SearchPillBehaviour.h"
 #include "SearchWeaponBehaviour.h"
+#include "HideBehaviour.h"
 #include "FleeBehaviour.h"
 #include "Character.h"
 #include "Rabbit.h"
@@ -9,13 +10,10 @@
 #include "Utill.h"
 #include <iostream>
 
-WanderingBehaviour::WanderingBehaviour(Rabbit* character) : CharacterBehaviour(character)
+WanderingBehaviour::WanderingBehaviour(Cow* character) : CharacterBehaviour(character)
 {
 	this->character = character;
-	chanse = uniform_int_distribution<int>(0, 100);
-	SDL_Texture* texture = character->LoadTexture();
-	//SDL_SetTextureColorMod(texture, 0, 0, 0);
-	character->SetTexture(texture);
+	chanse = uniform_int_distribution<int>(1, 100);
 	name = "Wandering";
 }
 
@@ -45,13 +43,31 @@ Vector2* WanderingBehaviour::move()
 
 void WanderingBehaviour::checkState()
 {
-	vector<Cow*> cows = character->getField()->getCows();
-	for (size_t i = 0; i < cows.size(); i++)
+	if (character->CheckCollision(character->getField()->getRabbit()))
 	{
-		if (Utill::distanceBewteenPoints(*cows[i]->getLocation(), *character->getLocation()) < character->viewDistance)
+		character->getField()->getRabbit()->addScore(10);
+		character->getField()->restart();
+		return;
+	}
+	else if (Utill::distanceBewteenPoints(*character->getLocation(), *character->getField()->getRabbit()->getLocation()) < 300)
+	{
+		int  result = chanse(FWApplication::GetInstance()->dre);
+		double* dna = character->dna.getDna();
+		if (result <= dna[0])
 		{
 			character->setBehaviour(new FleeBehaviour(character));
-			break;
+		}
+		else if (result <= dna[0] + dna[1])
+		{
+			character->setBehaviour(new SearchPillBehaviour(character));
+		}
+		else if (result <= dna[0] + dna[1] + dna[2])
+		{
+			character->setBehaviour(new HideBehaviour(character));
+		}
+		else if (result <= dna[0] + dna[1] + dna[2] + dna[3])
+		{
+			character->setBehaviour(new SearchWeaponBehaviour(character));
 		}
 	}
 }

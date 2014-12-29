@@ -1,21 +1,19 @@
 #pragma once
 #include "CharacterBehaviour.h"
-#include <random>
+
 
 class Cow;
 
-class WanderingBehaviour :
+class HideBehaviour :
 	public CharacterBehaviour
 {
 public:
-	WanderingBehaviour(Cow* character);
-	~WanderingBehaviour();
+	HideBehaviour(Cow* character);
+	virtual ~HideBehaviour();
 	virtual Vector2* move();
 	virtual void checkState();
 
 protected:
-	uniform_int_distribution<int> chanse;
 	Cow* character;
-	virtual void onExit();
 };
 

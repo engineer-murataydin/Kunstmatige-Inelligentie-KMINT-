@@ -1,18 +1,18 @@
 #pragma once
 #include "CharacterBehaviour.h"
 
-class Rabbit;
+class Cow;
 
 class SearchPillBehaviour :
 	public CharacterBehaviour
 {
 public:
-	SearchPillBehaviour(Rabbit* character);
+	SearchPillBehaviour(Cow* character);
 	~SearchPillBehaviour();
 	Vector2* move();
 	void checkState();
 
 protected:
-	Rabbit* character;
+	Cow* character;
 };
 

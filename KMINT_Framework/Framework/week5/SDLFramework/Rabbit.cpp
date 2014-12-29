@@ -1,8 +1,8 @@
 #include "Rabbit.h"
 #include "FWApplication.h"
-#include "WanderingBehaviour.h"
+#include "CatchCowBehaviour.h"
 
-Rabbit::Rabbit(Field* field, Vector2* location, SDL_Color color) :Character(field, location, color)
+Rabbit::Rabbit(Field* field, Vector2 location, SDL_Color color) :Character(field, location, color)
 {
 	textureName = "rabbit-3.png";
 	SetTexture(LoadTexture());
@@ -12,8 +12,8 @@ Rabbit::Rabbit(Field* field, Vector2* location, SDL_Color color) :Character(fiel
 
 	viewDistance = 100;
 	maxSpeed = 10;
-	maxTurnRate = 2;
-	behaviour = new WanderingBehaviour(this);
+	maxTurnRate = 4;
+	behaviour = new CatchCowBehaviour(this);
 }
 
 Rabbit::~Rabbit()

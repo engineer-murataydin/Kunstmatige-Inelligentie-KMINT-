@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-FleeBehaviour::FleeBehaviour(Rabbit* character) : CharacterBehaviour(character)
+FleeBehaviour::FleeBehaviour(Cow* character) : CharacterBehaviour(character)
 {
 	this->character = character;
 	name = "Flee";
@@ -21,39 +21,27 @@ FleeBehaviour::~FleeBehaviour()
 
 Vector2* FleeBehaviour::move()
 {
-	Vector2 avoid;
-	vector<Cow*> cowsInRange = character->getCowsInRange();
-	if (cowsInRange.size() > 0)
-	{
-		for (size_t i = 0; i < cowsInRange.size(); i++)
-		{
-			avoid = avoid + *cowsInRange[i]->getLocation();
-		}
+	Vector2 avoid = (*character->getField()->getRabbit()->getLocation() - *character->getLocation()) * -1;
 
-		avoid = avoid / cowsInRange.size();
-		FWApplication::GetInstance()->DrawRect(avoid.getX(), avoid.getY(), 10, 10, true);
+	avoid.normalize(character->maxTurnRate);
 
-		Vector2 move = (avoid - *character->getLocation()) * -1;
-		move.normalize();
+	character->applyForce(avoid);
 
-		move = move * character->maxTurnRate;
-
-		character->applyForce(move);
-	}
 	return character->getLocation();
 }
 
 void FleeBehaviour::checkState()
 {
-	if (character->getCowsInRange().size() == 0)
+	if (character->collideWith(character->getField()->getRabbit()))
 	{
-		character->setBehaviour(new WanderingBehaviour(character));
+		Field* field = character->getField();
+		field->getRabbit()->addScore(10);
+		field->restart();
 	}
 }
-
 void FleeBehaviour::onExit()
 {
-	
+
 }
 
 void FleeBehaviour::onEnter()

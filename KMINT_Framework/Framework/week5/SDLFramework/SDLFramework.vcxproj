@@ -85,15 +85,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CatchCowBehaviour.cpp" />
-    <ClCompile Include="CatchRabbitBehaviour.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterBehaviour.cpp" />
     <ClCompile Include="Cow.cpp" />
-    <ClCompile Include="DeadBehaviour.cpp" />
     <ClCompile Include="Dna.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FleeBehaviour.cpp" />
     <ClCompile Include="FWApplication.cpp" />
+    <ClCompile Include="HideBehaviour.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -101,7 +100,6 @@
     <ClCompile Include="Rabbit.cpp" />
     <ClCompile Include="SearchPillBehaviour.cpp" />
     <ClCompile Include="SearchWeaponBehaviour.cpp" />
-    <ClCompile Include="SleepingBehaviour.cpp" />
     <ClCompile Include="WanderingBehaviour.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
@@ -110,16 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CatchCowBehaviour.h" />
-    <ClInclude Include="CatchRabbitBehaviour.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterBehaviour.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Cow.h" />
-    <ClInclude Include="DeadBehaviour.h" />
     <ClInclude Include="Dna.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="FleeBehaviour.h" />
     <ClInclude Include="FWApplication.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HideBehaviour.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Spawner.h" />
@@ -128,7 +126,6 @@
     <ClInclude Include="Rabbit.h" />
     <ClInclude Include="SearchPillBehaviour.h" />
     <ClInclude Include="SearchWeaponBehaviour.h" />
-    <ClInclude Include="SleepingBehaviour.h" />
     <ClInclude Include="Utill.h" />
     <ClInclude Include="WanderingBehaviour.h" />
     <ClInclude Include="Weapon.h" />
