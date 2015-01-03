@@ -42,7 +42,7 @@ void CatchRabbitBehaviour::checkState()
 		else
 		{
 			Rabbit* rabbit = character->getLocation()->graph->rabbit;
-			rabbit->setBehaviour(new WanderingBehaviour(rabbit));
+			rabbit->setBehaviour(new DeadBehaviour(rabbit)); //WanderingBehaviour
 			character->setLocation(Node::getRandomConnectedNode(character->getLocation(), 100));
 		}
 	}

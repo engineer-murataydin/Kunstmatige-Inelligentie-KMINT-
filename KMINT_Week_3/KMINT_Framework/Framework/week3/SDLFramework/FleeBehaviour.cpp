@@ -1,4 +1,5 @@
 #include "FleeBehaviour.h"
+#include "DeadBehaviour.h"
 #include "Character.h"
 #include "Rabbit.h"
 #include "Graph.h"
@@ -26,5 +27,9 @@ Node* FleeBehaviour::move()
 
 void FleeBehaviour::checkState()
 {
-
+	if (character->getLocation() == character->getLocation()->graph->cow->getLocation())
+	{
+		character->setBehaviour(new DeadBehaviour(character));
+		delete this;
+	}
 }

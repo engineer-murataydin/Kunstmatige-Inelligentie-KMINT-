@@ -1,6 +1,7 @@
 #include "SearchPillBehaviour.h"
 #include "SearchWeaponBehaviour.h"
 #include "WanderingBehaviour.h"
+#include "DeadBehaviour.h"
 #include "Character.h"
 #include "Rabbit.h"
 #include "Graph.h"
@@ -37,7 +38,11 @@ void SearchPillBehaviour::checkState()
 		character->setBehaviour(new WanderingBehaviour(character));
 		character->pill = character->getLocation()->graph->pill;
 		character->pill->setLocation(character->getLocation()->graph->outOfscreen);
-
+		delete this;
+	}
+	else if (character->getLocation() == character->getLocation()->graph->cow->getLocation())
+	{
+		character->setBehaviour(new DeadBehaviour(character));
 		delete this;
 	}
 }
