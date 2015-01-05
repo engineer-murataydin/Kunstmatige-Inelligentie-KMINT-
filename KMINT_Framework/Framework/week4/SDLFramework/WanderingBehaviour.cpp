@@ -26,7 +26,7 @@ WanderingBehaviour::~WanderingBehaviour()
 
 Vector2* WanderingBehaviour::move()
 {
-	uniform_int_distribution<int> dist(-360, 360);
+	uniform_int_distribution<int> dist(0, 360);
 	int rotate = dist(FWApplication::GetInstance()->dre) * (M_PI / 180);
 
 

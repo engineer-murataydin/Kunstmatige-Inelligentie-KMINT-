@@ -13,6 +13,8 @@
 #include "Weapon.h"
 #include "Pill.h"
 
+int times = 0;
+
 int main(int argc, char **argv)
 {
 	//auto window = Window::CreateSDLWindow();
@@ -74,6 +76,10 @@ int main(int argc, char **argv)
 		application->EndTick();
 		if (application->GetTimeSinceStartedMS() - time >= 30000)
 		{
+			if (++times >= 5)
+			{
+				break;
+			}
 			time = application->GetTimeSinceStartedMS();
 
 			Field* best = fields[0];
@@ -116,5 +122,6 @@ int main(int argc, char **argv)
 	}
 
 	delete application;
+
 	return EXIT_SUCCESS;
 }
