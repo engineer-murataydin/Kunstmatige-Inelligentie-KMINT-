@@ -37,6 +37,8 @@ Node* WanderingBehaviour::move()
 
 void WanderingBehaviour::checkState()
 {
+	//if (!character->pill) //!character->pill
+
 	if (!character->pill && hunter->isHunting())
 	{
 		int random = chanse(dre);

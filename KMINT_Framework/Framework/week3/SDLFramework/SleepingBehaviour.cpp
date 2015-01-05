@@ -1,6 +1,7 @@
 #include "SleepingBehaviour.h"
 #include "CatchRabbitBehaviour.h"
 #include "Character.h"
+#include "Graph.h"
 
 SleepingBehaviour::SleepingBehaviour(Character* character) : CharacterBehaviour(character)
 {
