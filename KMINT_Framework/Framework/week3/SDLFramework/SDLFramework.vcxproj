@@ -102,7 +102,6 @@
     <ClCompile Include="Rabbit.cpp" />
     <ClCompile Include="SearchPillBehaviour.cpp" />
     <ClCompile Include="SearchWeaponBehaviour.cpp" />
-    <ClCompile Include="SeeCowBehaviour.cpp" />
     <ClCompile Include="SleepingBehaviour.cpp" />
     <ClCompile Include="WanderingBehaviour.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -130,7 +129,6 @@
     <ClInclude Include="Rabbit.h" />
     <ClInclude Include="SearchPillBehaviour.h" />
     <ClInclude Include="SearchWeaponBehaviour.h" />
-    <ClInclude Include="SeeCowBehaviour.h" />
     <ClInclude Include="SleepingBehaviour.h" />
     <ClInclude Include="Utill.h" />
     <ClInclude Include="WanderingBehaviour.h" />
